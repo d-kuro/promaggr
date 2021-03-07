@@ -2,6 +2,7 @@ package promaggr_test
 
 import (
 	"bytes"
+	"sort"
 	"testing"
 
 	"github.com/d-kuro/promaggr"
@@ -36,6 +37,10 @@ func TestMergeMetricFamily(t *testing.T) {
 	}
 
 	out := bytes.Buffer{}
+
+	sort.Slice(mfs, func(i, j int) bool {
+		return mfs[i].GetName() < mfs[j].GetName()
+	})
 
 	for _, mf := range mfs {
 		if _, err := expfmt.MetricFamilyToText(&out, mf); err != nil {
