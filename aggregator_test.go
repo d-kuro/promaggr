@@ -20,7 +20,6 @@ func TestCollector(t *testing.T) {
 	scrapeTargetCounter1 := newHTTPRequestCounter()
 	scrapeTargetRegistry1 := prometheus.NewRegistry()
 	scrapeTargetRegistry1.MustRegister(scrapeTargetCounter1)
-
 	scrapeTargetCounter1.WithLabelValues("200", http.MethodGet).Inc()
 
 	scrapeTarget1 := httptest.NewServer(promhttp.HandlerFor(scrapeTargetRegistry1, promhttp.HandlerOpts{}))
@@ -29,7 +28,6 @@ func TestCollector(t *testing.T) {
 	scrapeTargetCounter2 := newHTTPRequestCounter()
 	scrapeTargetRegistry2 := prometheus.NewRegistry()
 	scrapeTargetRegistry2.MustRegister(scrapeTargetCounter2)
-
 	scrapeTargetCounter2.WithLabelValues("200", http.MethodGet).Inc()
 
 	scrapeTarget2 := httptest.NewServer(promhttp.HandlerFor(scrapeTargetRegistry2, promhttp.HandlerOpts{}))
